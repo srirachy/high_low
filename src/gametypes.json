@@ -1,0 +1,12 @@
+[
+    {
+        "id": "playAsGuesserButton",
+        "value": 1,
+        "name": "Guesser"
+    },
+    {    
+        "id": "playAsDealerButton",
+        "value": 2,
+        "name": "Dealer"
+    }
+]

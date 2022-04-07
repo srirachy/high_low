@@ -1,0 +1,12 @@
+[
+    {
+        "id": "playAgainButton",
+        "value": 0,
+        "name": "High"
+    },
+    {    
+        "id": "returnToMainButton",
+        "value": 1,
+        "name": "Low"
+    }
+]

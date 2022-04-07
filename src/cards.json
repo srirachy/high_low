@@ -1,0 +1,67 @@
+[
+    {
+        "id": "cardTwoButton",
+        "value": 2,
+        "name": "2"
+    },
+    {
+        "id": "cardThreeButton",
+        "value": 3,
+        "name": "3"
+    },
+    {
+        "id": "cardFourButton",
+        "value": 4,
+        "name": "4"
+    },
+    {
+        "id": "cardFiveButton",
+        "value": 5,
+        "name": "5"
+    },
+    {
+        "id": "cardSixButton",
+        "value": 6,
+        "name": "6"
+    },
+    {
+        "id": "cardSevenButton",
+        "value": 7,
+        "name": "7"
+    },
+    {
+        "id": "cardEightButton",
+        "value": 8,
+        "name": "8"
+    },
+    {
+        "id": "cardTwoButton",
+        "value": 9,
+        "name": "9"
+    },
+    {
+        "id": "cardTenButton",
+        "value": 10,
+        "name": "10"
+    },
+    {
+        "id": "cardJackButton",
+        "value": 11,
+        "name": "J"
+    },
+    {
+        "id": "cardQueenButton",
+        "value": 11,
+        "name": "Q"
+    },
+    {
+        "id": "cardKingButton",
+        "value": 12,
+        "name": "K"
+    },
+    {
+        "id": "cardAceButton",
+        "value": 13,
+        "name": "A"
+    }
+]

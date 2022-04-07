@@ -1,0 +1,12 @@
+[
+    {
+        "id": "highButton",
+        "value": 0,
+        "name": "High"
+    },
+    {    
+        "id": "lowButton",
+        "value": 1,
+        "name": "Low"
+    }
+]
