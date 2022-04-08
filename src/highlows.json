@@ -2,11 +2,11 @@
     {
         "id": "highButton",
         "value": 0,
-        "name": "High"
+        "name": "Higher"
     },
     {    
         "id": "lowButton",
         "value": 1,
-        "name": "Low"
+        "name": "Lower"
     }
 ]

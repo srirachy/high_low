@@ -1,18 +1,50 @@
 import React, {useState, useEffect} from 'react';
-import Button from './Button';
 import ButtonSection from './ButtonSection'
+import Button from './Button';
 import cards from '../cards.json'
 import gametypes from '../gametypes.json'
 import highlows from '../highlows.json'
 //import titleimg from '../images/titleimg.png';
 
 const HighLow = () => {
-    let curGame = 0;
     //const [gameState, setGameState] = useState(0);
     const [gameStyle, setGameStyle] = useState(0);
-
+    const [botAnswer, setBotAnswer] = useState(0);
+    const [guessRemain, setGuessRemain] = useState(2);
     //could add useeffects here if needed
     //methods
+
+    const changeGameStyle = (gameVal) => {
+        //1 = guesser, 2 = dealer
+        if (gameVal === 1){
+            setBotAnswer((prevBotAnswer) => Math.floor(Math.random() * 13 + 1)); 
+        }
+        setGameStyle(gameVal);
+    };
+
+    const guessCard = (cardVal, id) => {
+        const hideButton = document.getElementById(id);
+        hideButton.setAttribute("disabled", true);
+
+        setGuessRemain((prevRemain) => prevRemain - 1);
+        if (guessRemain === 0){
+            //set win/lose text
+            setGameStyle(0);
+        }
+    };
+    
+    const highOrLow = (gameVal) => {
+        //alert(gameVal);
+    };
+
+    const renderHeader = () => {
+
+    };
+
+    const renderText = () => {
+
+    };
+
     const renderButtons = () => {
         const buttonElmts = [];
         switch(gameStyle){
@@ -37,13 +69,13 @@ const HighLow = () => {
                             id={id}
                             value={value}
                             children={name}
-                            onClick={() => guessCard(value)}
+                            onClick={() => guessCard(value, id)}
                         />
                     )
                 }
                 break;
             case 2:
-                // play as dealer
+                //play as dealer
                 for (const { id, value, name } of highlows){
                     buttonElmts.push(
                         <Button
@@ -70,31 +102,20 @@ const HighLow = () => {
 
         }
         return buttonElmts;
-    }
-
-    const changeGameStyle = (gameVal) => {
-        alert(gameVal);
-        setGameStyle(gameVal);
-        curGame = gameVal;
     };
 
-    const guessCard = (cardVal) => {
-        alert(cardVal);
-    };
-    
-    const highOrLow = (gameVal) => {
-        alert(gameVal);
-    };
     return (
         <>
-            {/* replace w/ image later */}
-            <section>
-                <h1>High Low</h1>
-            </section>
-            {/* Text Section */}
-            {/* Button Section */}
-            <ButtonSection>{renderButtons()}</ButtonSection>
-            <p>meow</p>
+            <article className="game--wrapper">
+                {/* replace w/ image later */}
+                <section>
+                    <h1>High Low</h1>
+                </section>
+                {/* Text Section */}
+                {/* Button Section */}
+                <ButtonSection>{renderButtons()}</ButtonSection>
+                <p>meow</p>
+            </article>
         </>
     );
 };
