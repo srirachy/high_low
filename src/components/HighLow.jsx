@@ -1,114 +1,91 @@
-import React, {useState} from 'react';
-import {nanoid} from 'nanoid';
+import React, {useEffect, useState} from 'react';
 import ButtonSection from './ButtonSection'
-import Button from './Button'
+import RenderButtons from './RenderButtons';
 import cards from '../cards'
-import gametypes from '../gametypes'
-import highlows from '../highlows'
-import postgames from '../postgames'
+
+//set initial card state to reset to
+const initialCardState = cards;
 
 const HighLow = () => {
-    //const [gameState, setGameState] = useState(0);
     const [gameStyle, setGameStyle] = useState(0);
     const [botAnswer, setBotAnswer] = useState(0);
-    const [guessRemain, setGuessRemain] = useState(2);
-    //could add useeffects here if needed
-    //methods
+    const [prevGameStyle, setPrevGameStyle] = useState(0);
+    const [userGuess, setUserGuess] = useState(1);
+    const [guessRemain, setGuessRemain] = useState(3);
+    const [cardState, setCardState] = useState(initialCardState);
+
+
+    useEffect(() => {
+        if (guessRemain === 0){
+            //set win/lose text
+            setGameStyle(4);
+            setGuessRemain(3);
+            setBotAnswer(0);
+            setUserGuess(1);
+            setCardState(initialCardState);
+            console.log("you lose");
+        } else if (userGuess === botAnswer){
+            //set win/lose text
+            setGameStyle(4);
+            setGuessRemain(3);
+            setBotAnswer(0);
+            setUserGuess(1);
+            setCardState(initialCardState);
+            console.log("you win");
+        }
+    }, [userGuess, gameStyle, guessRemain, botAnswer])
 
     const changeGameStyle = (gameVal) => {
         //1 = guesser, 2 = dealer
         if (gameVal === 1){
-            setBotAnswer((prevBotAnswer) => Math.floor(Math.random() * 13 + 1)); 
+            setBotAnswer((prevBotAnswer) => Math.floor(Math.random() * (14 - 2 + 1) + 2));
         }
         setGameStyle(gameVal);
+        setPrevGameStyle(gameVal);
     };
 
-    const guessCard = (cardVal, id) => {
-        const hideButton = document.getElementById(id);
-        hideButton.setAttribute("disabled", true);
-
-        setGuessRemain((prevRemain) => prevRemain - 1);
-        if (guessRemain === 0){
-            //set win/lose text
-            setGameStyle(3);
-            setGuessRemain(2);
+    const guessCard = (cardVal, name, disabled) => {
+        setUserGuess(cardVal);
+        setDisabled(name);
+        if (guessRemain > 0){
+            setGuessRemain((prevRemain) => prevRemain - 1);
         }
     };
+
+    const setDisabled = (cardVal) => {
+        //create a map that will store a new array with the card disabled
+        const updatedCardState = cardState.map(theCard => {
+            if (theCard.name === cardVal){
+                return {...theCard, disabled: true};
+            }
+            return theCard;
+        })
+        //set the card state to the new array
+        setCardState(updatedCardState);
+    };
+
+    const setInitialCard = (cardVal) => {
+        //add card name
+        setBotAnswer(cardVal);
+        setGameStyle(3);
+    }
     
-    const highOrLow = (gameVal) => {
-        //alert(gameVal);
+    const highOrLow = (buttonVal) => {
+       //write bot logic here?
     };
 
-    const renderHeader = () => {
+    const postGameMenu = (buttonVal) => {
+        (buttonVal === 0 ? changeGameStyle(prevGameStyle) : setGameStyle(0))
+    }
 
-    };
+    // const renderHeader = () => {
 
-    const renderText = () => {
+    // };
 
-    };
+    // const renderText = () => {
 
-    const renderButtons = () => {
-        const buttonElmts = [];
-        switch(gameStyle){
-            case 0:
-                // initial
-                for (const { id, value, name } of gametypes){
-                    buttonElmts.push(
-                        <Button
-                            id={id}
-                            key={nanoid()}
-                            value={value}
-                            children={name}
-                            onClick={() => changeGameStyle(value)}
-                        />
-                    )
-                }
-                break;
-            case 1:
-                // play as guesser
-                for (const { id, value, name } of cards){
-                    buttonElmts.push(
-                        <Button
-                            id={id}
-                            key={nanoid()}
-                            value={value}
-                            children={name}
-                            onClick={() => guessCard(value, id)}
-                        />
-                    )
-                }
-                break;
-            case 2:
-                //play as dealer
-                for (const { id, value, name } of highlows){
-                    buttonElmts.push(
-                        <Button
-                            id={id}
-                            key={nanoid()}
-                            value={value}
-                            children={name}
-                            onClick={() => highOrLow(value)}
-                        />
-                    )
-                }
-                break;
-            default:
-                // initial
-                for (const { id, value, name } of postgames){
-                    buttonElmts.push(
-                        <Button
-                            id={id}
-                            key={nanoid()}
-                            value={value}
-                            children={name}
-                            onClick={() => changeGameStyle(value)}
-                        />
-                    )
-                }
+    // };
 
-        }
-        return buttonElmts;
-    };
 
     return (
         <>
@@ -119,7 +96,9 @@ const HighLow = () => {
                 </section>
                 {/* Text Section */}
                 {/* Button Section */}
-                <ButtonSection>{renderButtons()}</ButtonSection>
+                <ButtonSection>
+                    <RenderButtons gameStyle={gameStyle} guessCard={guessCard} changeGameStyle={changeGameStyle} setInitialCard={setInitialCard} highOrLow={highOrLow} postGameMenu={postGameMenu} cardState={cardState}></RenderButtons>
+                </ButtonSection>
                 <p>meow</p>
             </article>
         </>

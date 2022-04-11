@@ -1,11 +1,11 @@
 [
     {
-        "id": "playAsGuesserButton",
+        "disabled": false,
         "value": 1,
         "name": "Guesser"
     },
     {    
-        "id": "playAsDealerButton",
+        "disabled": false,
         "value": 2,
         "name": "Dealer"
     }
