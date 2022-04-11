@@ -2,11 +2,11 @@
     {
         "id": "playAgainButton",
         "value": 0,
-        "name": "High"
+        "name": "Play Again"
     },
     {    
         "id": "returnToMainButton",
         "value": 1,
-        "name": "Low"
+        "name": "Return to Main Menu"
     }
 ]

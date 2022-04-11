@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import {nanoid} from 'nanoid';
 import ButtonSection from './ButtonSection'
-import Button from './Button';
-import cards from '../cards.json'
-import gametypes from '../gametypes.json'
-import highlows from '../highlows.json'
-//import titleimg from '../images/titleimg.png';
+import Button from './Button'
+import cards from '../cards'
+import gametypes from '../gametypes'
+import highlows from '../highlows'
+import postgames from '../postgames'
 
 const HighLow = () => {
     //const [gameState, setGameState] = useState(0);
@@ -29,7 +30,8 @@ const HighLow = () => {
         setGuessRemain((prevRemain) => prevRemain - 1);
         if (guessRemain === 0){
             //set win/lose text
-            setGameStyle(0);
+            setGameStyle(3);
+            setGuessRemain(2);
         }
     };
     
@@ -54,6 +56,7 @@ const HighLow = () => {
                     buttonElmts.push(
                         <Button
                             id={id}
+                            key={nanoid()}
                             value={value}
                             children={name}
                             onClick={() => changeGameStyle(value)}
@@ -67,6 +70,7 @@ const HighLow = () => {
                     buttonElmts.push(
                         <Button
                             id={id}
+                            key={nanoid()}
                             value={value}
                             children={name}
                             onClick={() => guessCard(value, id)}
@@ -80,6 +84,7 @@ const HighLow = () => {
                     buttonElmts.push(
                         <Button
                             id={id}
+                            key={nanoid()}
                             value={value}
                             children={name}
                             onClick={() => highOrLow(value)}
@@ -89,10 +94,11 @@ const HighLow = () => {
                 break;
             default:
                 // initial
-                for (const { id, value, name } of gametypes){
+                for (const { id, value, name } of postgames){
                     buttonElmts.push(
                         <Button
                             id={id}
+                            key={nanoid()}
                             value={value}
                             children={name}
                             onClick={() => changeGameStyle(value)}
