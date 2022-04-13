@@ -24,6 +24,8 @@ const HighLow = () => {
     //const [botState, setBotState] = useState('');
     const [botCardAsText, setBotCardAsText] = useState('');
     // const [textState, setTextState] = useState(allGuesserText);
+    const [curMax, setCurMax] = useState(0);
+    const [curMin, setCurMin] = useState(0);
 
     //use effects for guesser
     useEffect(() => {
@@ -48,27 +50,39 @@ const HighLow = () => {
 
     //use effect for dealer
     useEffect(() => {
-        if(gameStyle === 3){
-             if (botAnswer === userGuess){
+        if(gameStyle === 3 || (prevGameStyle === 2 && gameStyle === 4)){
+            // using prevgamestyle as another dep array is a little hackish but it works
+             if (userGuess === botAnswer){
                 setGameStyle(4);
-                setBotCards(initBotCards);
                 console.log("you lose");
             } else if (guessRemain === 0){
                 setGameStyle(4);
-                setBotCards(initBotCards);
                 console.log("you win");
             }
         }
-    }, [botAnswer, gameStyle, guessRemain, userGuess]);
+    }, [botAnswer, gameStyle, guessRemain, userGuess, prevGameStyle]);
+
+    //useeffect for curmin & curmax, which is dependent on botCards?
+    useEffect(() => {
+        const findMax = Math.max(...botCards);
+        setCurMax(findMax);
+        const findMin = Math.min(...botCards);
+        setCurMin(findMin);
+    }, [botCards]);
+    
+    //useEffect to find botAnswer using curMax and curMin
+    useEffect(() => {
+        const findAnswer = Math.floor(Math.random() * (curMax - curMin + 1) + curMin);
+        setBotAnswer(findAnswer);
+    }, [curMax, curMin]);
 
     //every time bot answer renders, update setBotCardAsText
     useEffect(() => {
-        if(gameStyle === 3){
-            console.log("i rendered");
+        if(gameStyle === 3 || (prevGameStyle === 2 && gameStyle === 4)){
             const curAnswer = getBotCardAsText(botAnswer);
             setBotCardAsText(curAnswer);
         }
-    }, [botAnswer, gameStyle]);
+    }, [botAnswer, gameStyle, prevGameStyle]);
 
     const changeGameStyle = (gameVal) => {
         //1 = guesser, 2 = dealer
@@ -78,7 +92,6 @@ const HighLow = () => {
         }
         setGuessRemain(3);
         setGameStyle(gameVal);
-        setBotCardAsText('');
         if (gameVal === 1 || gameVal === 2){
             setPrevGameStyle(gameVal);
         }
@@ -104,36 +117,30 @@ const HighLow = () => {
         setCardState(updatedCardState);
     };
 
-    const theBotGuess = () => {
-        //need to set to to useeffect maybe? i tried but no bueno, but these values need to be up-to-date
+    const initBotGuess = () => {
         const curMax = Math.max(...botCards);
-        //console.log(botCards);
-        console.log(curMax);
         const curMin = Math.min(...botCards);
-        console.log(curMin)
         setBotAnswer(Math.floor(Math.random() * (curMax - curMin + 1) + curMin));
-        console.log(botAnswer);
         if (guessRemain > 0){
             setGuessRemain((prevRemain) => prevRemain - 1);
         };
     }
 
-    // useEffect(() => {
-    //     const curMax = Math.max(...botCards);
-    //     //console.log(botCards);
-    //     console.log(curMax);
-    //     const curMin = Math.min(...botCards);
-    //     console.log(curMin)
-    //     setBotAnswer(Math.floor(Math.random() * (curMax - curMin + 1) + curMin));
-    // }, [botCards])
+    const theBotGuess = () => {
+        if (guessRemain > 0){
+            setGuessRemain((prevRemain) => prevRemain - 1);
+        };
+    }
 
     const setInitialCard = (cardVal) => {
         //add card name
+        setBotCards(initBotCards);
         setGuessRemain(3);
         setBotAnswer(0);
         setUserGuess(cardVal);
         setGameStyle(3);
-        theBotGuess(); //set initial bot guess
+        //theBotGuess(); //set initial bot guess
+        initBotGuess();
     }
 
     const getBotCardAsText = (cardVal) => {
@@ -155,6 +162,14 @@ const HighLow = () => {
         console.log(updatedBotCards);
         setBotCards(updatedBotCards);
     }
+
+    const filterAll = () => {
+        const updatedBotCards = botCards.filter(theNum => {
+            return theNum;
+        })
+        console.log(updatedBotCards);
+        setBotCards(updatedBotCards);
+    }
     
     const highOrLow = (buttonVal) => {
         //if higher, remove lower else remove higher
@@ -164,8 +179,9 @@ const HighLow = () => {
             } else if (userGuess > botAnswer){
                 filterLesser();
             }
+        } else {
+            filterAll();
         }
-        //filterItems();
         theBotGuess();
     };
 
@@ -203,7 +219,7 @@ const HighLow = () => {
                 </HeaderSection>
                 {/* Text Section */}
                 <TextSection>
-                    {botCardAsText && (gameStyle === 3 || gameStyle === 4) && <p>Bot guess is: {botCardAsText}</p>}
+                    {(gameStyle === 3 || (prevGameStyle === 2 && gameStyle === 4)) && <p>Bot guess is: {botCardAsText}</p>}
                     {(gameStyle === 1 || gameStyle === 3 || gameStyle === 4) && <p>Guesses Remaining: {guessRemain}/3</p>}
                 </TextSection>
                 {/* Button Section */}
