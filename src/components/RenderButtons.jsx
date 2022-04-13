@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {nanoid} from 'nanoid';
-import Button from './Button'
-import cards from '../cards'
-import gametypes from '../gametypes'
-import highlows from '../highlows'
-import postgames from '../postgames'
+import Button from './Button';
+import cards from '../cards';
+import gametypes from '../gametypes';
+import highlows from '../highlows';
+import postgames from '../postgames';
 
 const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, highOrLow, postGameMenu, cardState}) => {
 
@@ -23,35 +23,39 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
                         disabled={disabled}
                     />
                 )
-            }
+            };
             break;
         case 1:
             // play as guesser
-            for (const { disabled, value, name } of cardState){
+            for (const { disabled, value, name, imgName } of cardState){
+                //<button><img/></button>
                 buttonElmts.push(
                     <Button
                         key={nanoid()}
                         value={value}
                         children={name}
                         onClick={() => guessCard(value, name, disabled)}
-                        disabled={disabled}
-                    />
+                        disabled={disabled}>
+                        {imgName && <img src={`${process.env.PUBLIC_URL}/images/${imgName}.svg`} alt={name}/>}
+                    </Button>
                 )
-            }
+            };
             break;
         case 2:
             // play as dealer
-            for (const { disabled, value, name } of cards){
+            for (const { disabled, value, name, imgName } of cards){
+                //<button><img/></button>
                 buttonElmts.push(
                     <Button
                         key={nanoid()}
                         value={value}
                         children={name}
                         onClick={() => setInitialCard(value, name)}
-                        disabled={disabled}
-                    />
+                        disabled={disabled}>
+                        {imgName && <img src={`${process.env.PUBLIC_URL}/images/${imgName}.svg`} alt={name}/>}
+                    </Button>
                 )
-            }
+            };
             break;
         case 3:
             //play as dealer
@@ -65,10 +69,10 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
                         disabled={disabled}
                     />
                 )
-            }
+            };
             break;
         default:
-            // initial
+            // postgame
             for (const { disabled, value, name } of postgames){
                 buttonElmts.push(
                     <Button
@@ -79,8 +83,7 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
                         disabled={disabled}
                     />
                 )
-            }
-
+            };
     }
     return buttonElmts;
 };

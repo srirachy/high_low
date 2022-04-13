@@ -2,66 +2,79 @@
     {
         "disabled": false,
         "value": 2,
-        "name": "2"
+        "name": "2",
+        "imgName": "2_of_hearts"
     },
     {
         "disabled": false,
         "value": 3,
-        "name": "3"
+        "name": "3",
+        "imgName": "3_of_hearts"
     },
     {
         "disabled": false,
         "value": 4,
-        "name": "4"
+        "name": "4",
+        "imgName": "4_of_hearts"
     },
     {
         "disabled": false,
         "value": 5,
-        "name": "5"
+        "name": "5",
+        "imgName": "5_of_hearts"
     },
     {
         "disabled": false,
         "value": 6,
-        "name": "6"
+        "name": "6",
+        "imgName": "6_of_hearts"
     },
     {
         "disabled": false,
         "value": 7,
-        "name": "7"
+        "name": "7",
+        "imgName": "7_of_hearts"
     },
     {
         "disabled": false,
         "value": 8,
-        "name": "8"
+        "name": "8",
+        "imgName": "8_of_hearts"
     },
     {
         "disabled": false,
         "value": 9,
-        "name": "9"
+        "name": "9",
+        "imgName": "9_of_hearts"
     },
     {
         "disabled": false,
         "value": 10,
-        "name": "10"
+        "name": "10",
+        "imgName": "10_of_hearts"
     },
     {
         "disabled": false,
         "value": 11,
-        "name": "J"
+        "name": "J",
+        "imgName": "jack_of_hearts"
     },
     {
         "disabled": false,
         "value": 12,
-        "name": "Q"
+        "name": "Q",
+        "imgName": "queen_of_hearts"
     },
     {
         "disabled": false,
         "value": 13,
-        "name": "K"
+        "name": "K",
+        "imgName": "king_of_hearts"
     },
     {
         "disabled": false,
         "value": 14,
-        "name": "A"
+        "name": "A",
+        "imgName": "ace_of_hearts"
     }
 ]
