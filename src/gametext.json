@@ -1,11 +1,32 @@
 [
     {
+        "text": "Select a game mode"
+    },
+    {
         "text": "Choose your first card"
     },
     {
-        "text": "My card is higher than your chosen card"
+        "text": "Bot's card is higher than your chosen card"
     },
     {
-        "text": "My card is lower than your chosen card"
+        "text": "Bot's card is lower than your chosen card"
+    },
+    {
+        "text": "Select a card for the bot to guess"
+    },
+    {
+        "text": "Bot selects first card"
+    },
+    {
+        "text": "Bot selects a higher card"
+    },
+    {
+        "text": "Bot selects a lower card"
+    },
+    {
+        "text": "Bot doesn't believe you and selects a higher card"
+    },
+    {
+        "text": "Bot doesn't believe you and selects a lower card"
     }
 ]

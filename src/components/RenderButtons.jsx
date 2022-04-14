@@ -12,7 +12,7 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
 
     switch(gameStyle){
         case 0:
-            // initial
+            // initial -- main menu
             for (const { disabled, value, name } of gametypes){
                 buttonElmts.push(
                     <Button
@@ -75,7 +75,7 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
             };
             break;
         default:
-            // postgame
+            // postgame -- win/lose screen
             for (const { disabled, value, name } of postgames){
                 buttonElmts.push(
                     <Button
