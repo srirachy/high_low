@@ -2,7 +2,7 @@
 
 ## Description
 This project has the following requirements:
-- Build out simple wireframe using [wireframe.cc](https://wireframe.cc/) or a similar tool
+- Build out a simple wireframe using [wireframe.cc](https://wireframe.cc/LklOyr) or a similar tool
 - Create a GitHub repository for the game and do regular add/commits for multiple 'save points'
 - Assure that the game has multiple components and use props to pass data from parent components into child components
 - Use state (the `useState()` hook) when needed to store data within a component
