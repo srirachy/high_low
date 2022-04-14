@@ -12,14 +12,6 @@ html, body, #root, .gameWrapper{
     overflow: hidden;
 }
 
-h1{
-    font-size: 3rem;
-}
-
-p{
-    font-size: 1.5rem;
-}
-
 body{
     background-color: #091c18;
 }
@@ -30,6 +22,7 @@ body{
     flex-direction: column;
 }
 
+//header section css
 .headerSection{
     min-height: 10vh;
     display: flex;
@@ -38,6 +31,11 @@ body{
     margin: 5px;
 }
 
+h1{
+    font-size: 3rem;
+}
+
+//text section css
 .textSection{
     min-height: 10vh;
     justify-content: center;
@@ -45,6 +43,10 @@ body{
     text-align: center;
     margin: 3px;
     margin-top: 10px;
+}
+
+p{
+    font-size: 1.5rem;
 }
 
 //button css
