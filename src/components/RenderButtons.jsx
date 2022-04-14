@@ -27,7 +27,7 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
             break;
         case 1:
             // play as guesser
-            for (const { disabled, value, name, imgName } of cardState){
+            for (const { disabled, value, name, imgName, className } of cardState){
                 //<button><img/></button>
                 buttonElmts.push(
                     <Button
@@ -35,7 +35,9 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
                         value={value}
                         children={name}
                         onClick={() => guessCard(value, name, disabled)}
-                        disabled={disabled}>
+                        disabled={disabled}
+                        className={className}>
+                        {/* cool trick to get img source */}
                         {imgName && <img src={`${process.env.PUBLIC_URL}/images/${imgName}.svg`} alt={name}/>}
                     </Button>
                 )
@@ -43,7 +45,7 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
             break;
         case 2:
             // play as dealer
-            for (const { disabled, value, name, imgName } of cards){
+            for (const { disabled, value, name, imgName, className } of cards){
                 //<button><img/></button>
                 buttonElmts.push(
                     <Button
@@ -51,7 +53,8 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
                         value={value}
                         children={name}
                         onClick={() => setInitialCard(value, name)}
-                        disabled={disabled}>
+                        disabled={disabled}
+                        className={className}>
                         {imgName && <img src={`${process.env.PUBLIC_URL}/images/${imgName}.svg`} alt={name}/>}
                     </Button>
                 )

@@ -1,9 +1,8 @@
 import React from 'react';
 
-const Header = ({ children }) => {
-    return (
-        <h1>{children}</h1>
-    );
+const Header = ({ type = 'h1', children }) => {
+    const HeaderElmt = type;
+    return <HeaderElmt>{children}</HeaderElmt>;
 };
 
 export default Header;
