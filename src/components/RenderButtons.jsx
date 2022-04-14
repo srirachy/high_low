@@ -44,7 +44,7 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
             };
             break;
         case 2:
-            // play as dealer
+            // play as dealer -- choose card for bot to guess
             for (const { disabled, value, name, imgName, className } of cards){
                 //<button><img/></button>
                 buttonElmts.push(
@@ -61,7 +61,7 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
             };
             break;
         case 3:
-            //play as dealer
+            //play as dealer -- select high/low for bot
             for (const { disabled, value, name } of highlows){
                 buttonElmts.push(
                     <Button

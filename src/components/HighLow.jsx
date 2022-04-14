@@ -10,7 +10,7 @@ import gametext from '../gametext';
 import headertext from '../headertext';
 import image from "../img/card_table.png";
 
-//set initial card state to reset to
+//set initial states to reset to and store text arrays
 const initialCardState = cards;
 const initBotCards = cards.map(theCard => theCard.value);
 const allHeaderText = headertext.map(theText => theText.text);
@@ -30,18 +30,16 @@ const HighLow = () => {
     const [headerText, setHeaderText] = useState(allHeaderText[0]);
     //gotta finish adding into guesser text and dealer text, also a place to set a reminder on what card you chose for bot to guess
 
-    //use effects for guesser, win/lose condition
+    //useeffect for guesser, win/lose condition
     useEffect(() => {
         if(gameStyle === 1){
             if (userGuess === botAnswer){
-                //set win/lose text
                 setGameStyle(4);
                 setHeaderText(allHeaderText[3]);
                 setBotAnswer(0);
                 setUserGuess(1);
                 setCardState(initialCardState);
             } else if (guessRemain === 0){
-                //set win/lose text
                 setGameStyle(4);
                 setHeaderText(allHeaderText[4]);
                 setBotAnswer(0);
@@ -51,7 +49,7 @@ const HighLow = () => {
         };
     }, [botAnswer, gameStyle, guessRemain, userGuess]);
 
-    //use effect for dealer, win/lose condition
+    //useeffect for dealer, win/lose condition
     useEffect(() => {
         if(gameStyle === 3 || (prevGameStyle === 2 && gameStyle === 4)){
             // using prevgamestyle as another dep array is a little hackish but it works
@@ -65,7 +63,7 @@ const HighLow = () => {
         }
     }, [botAnswer, gameStyle, guessRemain, userGuess, prevGameStyle]);
 
-    //useeffect for curmin & curmax, which is dependent on botCards
+    //useeffect for curmin & curmax, which is dependent on botCards specifically after filters
     useEffect(() => {
         const findMax = Math.max(...botCards);
         setCurMax(findMax);
@@ -90,7 +88,6 @@ const HighLow = () => {
     //onclick from main menu into a chosen game
     const changeGameStyle = (gameVal) => {
         //1 = guesser, 2 = dealer
-        console.log(allGuesserText);
         if (gameVal === 1){
             const findRando = Math.floor(Math.random() * (14 - 2 + 1) + 2)
             setBotAnswer(findRando);
@@ -101,7 +98,7 @@ const HighLow = () => {
         setGuessRemain(3);
         setGameStyle(gameVal);
         if (gameVal === 1 || gameVal === 2){
-            setPrevGameStyle(gameVal);
+            setPrevGameStyle(gameVal);  //mostly for play again button and some oneffect scenarios
         }
     };
 
@@ -153,7 +150,7 @@ const HighLow = () => {
         theBotGuess();
     };
 
-    //set initial bot guess not dependent on useEffect
+    //set initial bot guess not dependent on useEffect, mostly because of botcards
     const initBotGuess = () => {
         const initCurMax = Math.max(...botCards);
         const initCurMin = Math.min(...botCards);
@@ -181,7 +178,6 @@ const HighLow = () => {
         const updatedBotCards = botCards.filter(theNum => {
             return theNum < botAnswer;
         })
-        console.log(updatedBotCards);
         setBotCards(updatedBotCards);
     }
 
@@ -190,7 +186,6 @@ const HighLow = () => {
         const updatedBotCards = botCards.filter(theNum => {
             return theNum > botAnswer;
         })
-        console.log(updatedBotCards);
         setBotCards(updatedBotCards);
     }
 
@@ -199,7 +194,6 @@ const HighLow = () => {
         const updatedBotCards = botCards.filter(theNum => {
             return theNum;
         })
-        console.log(updatedBotCards);
         setBotCards(updatedBotCards);
     }
 
