@@ -87,7 +87,7 @@ const RenderButtons = ({gameStyle, changeGameStyle, guessCard, setInitialCard, h
                     />
                 )
             };
-    }
+    };
     return buttonElmts;
 };
 

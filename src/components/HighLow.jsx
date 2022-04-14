@@ -154,7 +154,7 @@ const HighLow = () => {
     const initBotGuess = () => {
         const initCurMax = Math.max(...botCards);
         const initCurMin = Math.min(...botCards);
-        const initFindRandoAnswer = Math.floor(Math.random() * (initCurMax - initCurMin + 1) + initCurMin)
+        const initFindRandoAnswer = Math.floor(Math.random() * (initCurMax - initCurMin + 1) + initCurMin);
         setBotAnswer(initFindRandoAnswer);
         if (guessRemain > 0){
             setGuessRemain((prevRemain) => prevRemain - 1);
@@ -199,7 +199,7 @@ const HighLow = () => {
 
     //onclick post game menu into main menu or to play same game
     const postGameMenu = (buttonVal) => {
-        (buttonVal === 0 ? changeGameStyle(prevGameStyle) : changeGameStyle(0))
+        (buttonVal === 0 ? changeGameStyle(prevGameStyle) : changeGameStyle(0));
     }
 
     return (
