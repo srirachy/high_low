@@ -6,15 +6,15 @@ import Text from './Text';
 import HeaderSection from './HeaderSection';
 import Header from './Header';
 import cards from '../cards';
-import guessertext from '../guessertext';
+import gametext from '../gametext';
 import headertext from '../headertext';
 import image from "../img/card_table.png";
 
 //set initial card state to reset to
 const initialCardState = cards;
 const initBotCards = cards.map(theCard => theCard.value);
-const allGuesserText = guessertext.map(theText => theText.text);
 const allHeaderText = headertext.map(theText => theText.text);
+const allGuesserText = gametext.map(theText => theText.text);
 
 const HighLow = () => {
     const [gameStyle, setGameStyle] = useState(0);
@@ -28,6 +28,7 @@ const HighLow = () => {
     const [curMax, setCurMax] = useState(0);
     const [curMin, setCurMin] = useState(0);
     const [headerText, setHeaderText] = useState(allHeaderText[0]);
+    //gotta finish adding into guesser text and dealer text, also a place to set a reminder on what card you chose for bot to guess
 
     //use effects for guesser, win/lose condition
     useEffect(() => {
@@ -216,7 +217,8 @@ const HighLow = () => {
                     <Header type="h1">{headerText}</Header>
                 </HeaderSection>
                 <TextSection>
-                    <Text>placeholderText</Text>
+                    {/* replace placeholder w/ text for dealer and text for guesser */}
+                    <Text>placeholderText</Text> 
                     {(gameStyle === 3 || (prevGameStyle === 2 && gameStyle === 4)) && <Text>Bot guess is: {botCardAsText}</Text>}
                     {(gameStyle === 1 || gameStyle === 3 || gameStyle === 4) && <Text>Guesses Remaining: {guessRemain}/3</Text>}
                 </TextSection>
